@@ -1,0 +1,29 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="jumbotron" style="margin-top: 100px;">
+    <h1 class="display-4">Library</h1>
+    <hr class="my-4">
+    <form class="form-group" action="{{ path("fos_user_security_check") }}" method="post">
+        {% if csrf_token %}
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+        {% endif %}
+
+        <div class="form-group">
+        <input class="form-control" type="text" id="username" name="_username" placeholder="Username" value="{{ last_username }}" required="required" />
+        </div>
+
+        <div class="form-group">
+            <input class="form-control" type="password" id="password" name="_password" placeholder="Password" required="required" />
+        </div>
+
+        <label class="control-label" for="remember_me">Remember me</label>
+        <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+
+        <input class="btn btn-default" type="submit" id="_submit" name="_submit" value="Login" />
+    </form>
+</div>
+
+
+{% if error %}
+    <div class="alert alert-warning" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}

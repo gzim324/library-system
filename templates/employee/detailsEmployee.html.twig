@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h2>{{ user.fullname }}</h2>
+    <h4>{{ user.username }}</h4>
+    <p>{{ user.phone }}</p>
+    <p>{{ user.email }}</p>
+    <a class="btn btn-warning" href="{{ path('reset_password_employee', {'id': user.id}) }}">Reset password</a>
+    {% if user.enabled == 1 %}
+        <a class="btn btn-danger" href="{{ path('deactivate_employee', {'id': user.id}) }}"><i>Deactivate account</i></a>
+    {% else %}
+        <a class="btn btn-info" href="{{ path('activate_employee', {'id': user.id}) }}"><i>Activate account</i></a>
+    {% endif %}
+
+{% endblock %}

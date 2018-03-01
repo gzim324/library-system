@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="col-lg-10">
+
+        {% if is_granted('ROLE_ADMIN') %}
+            <h3>New message</h3>
+            {{ form_start(formMessage, {"attr": {"novalidate": "novalidate"}}) }}
+            <div class="form-group">
+                {{ form_widget(formMessage.message, {'attr': {'placeholder': 'Message content'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_widget(formMessage.save, {'attr': {'class': 'btn btn-light'}}) }}
+            </div>
+            {{ form_end(formMessage) }}
+            <hr>
+        {% endif %}
+
+
+        {% for entry in resultFormMessage %}
+            <div class="card">
+                <div class="card-header">
+                    {{ entry.createdAt | date }}
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{ entry.message|raw }}</p>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a class="btn btn-danger btn-sm" href="{{ path("delete_message", {'id': entry.id}) }}">DELETE</a>
+                    {% endif %}
+                </div>
+            </div>
+            <br>
+        {% else %}
+            <p>No news</p>
+        {% endfor %}
+
+    </div>
+
+
+    {#<div class="navigation">#}
+    {#{{ knp_pagination_render(selectUsers) }}#}
+    {#</div>#}
+
+{% endblock %}

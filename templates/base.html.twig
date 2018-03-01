@@ -1,12 +1,72 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Library{% endblock %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+{% if is_granted('ROLE_ADMIN') %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('message_index') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('book_index') }}">BOOK</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('employee_index') }}">EMPLOYEE</a>
+                </li>
+            </ul>
+            <a class="nav-link" href="{{ path('fos_user_security_logout') }}">logout</a>
+        </div>
+    </nav>
+{% elseif is_granted('ROLE_USER') %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('message_index') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('book_index') }}">BOOK</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">READER</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">BORROWED</a>
+                </li>
+            </ul>
+            <a class="nav-link" href="{{ path('fos_user_security_logout') }}">logout</a>
+        </div>
+    </nav>
+{% endif %}
+
+<div class="container" style="margin-top: 50px;">
+    {% for message in app.flashes("success") %}
+        <div class="alert alert-success" role="alert">{{ message }}</div>
+    {% endfor %}
+    {% for message in app.flashes("error") %}
+        <div class="alert alert-danger" role="alert">{{ message }}</div>
+    {% endfor %}
+    {% for message in app.flashes("warning") %}
+        <div class="alert alert-warning" role="alert">{{ message }}</div>
+    {% endfor %}
+</div>
+
+
+<div class="container">
+    {% block body %} {% endblock %}
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
 </html>

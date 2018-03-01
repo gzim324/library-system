@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <a href="{{ path('new_employee') }}" class="btn btn-outline-secondary">New Employee</a>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Username</th>
+            <th scope="col">Fullname</th>
+            <th scope="col">Enabled</th>
+            <th scope="col">#</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for user in selectUsers %}
+                {% if user.username == 'admin' %}
+                    <tr class="table-active">
+                {% else %}
+                    <tr>
+                {% endif %}
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.fullname }}</td>
+                    <td>
+                        {% if user.enabled == 1 %}
+                            ACTIVE
+                        {% else %}
+                            INACTIVE
+                        {% endif %}
+                    </td>
+                    <td><a href="{{ path('details_employee', {'id': user.id}) }}" class="btn btn-outline-secondary">Details</a></td>
+                    </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="navigation">
+        {{ knp_pagination_render(selectUsers) }}
+    </div>
+
+{% endblock %}

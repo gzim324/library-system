@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Library|New Book{% endblock %}
+
+{% block body %}
+
+    <h1>new Book</h1>
+    {{ form_start(formBook, {"attr": {"novalidate": "novalidate"}}) }}
+    <div class="form-group">
+        {{ form_widget(formBook.title, {'attr': {'placeholder': 'Title'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_widget(formBook.author, {'attr': {'placeholder': 'Author'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_widget(formBook.category, {'attr': {'placeholder': 'Category'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_widget(formBook.isbn, {'attr': {'placeholder': 'ISBN'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_widget(formBook.file, {'attr': {'placeholder': 'File'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_widget(formBook.description, {'attr': {'placeholder': 'Description'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_widget(formBook.save, {'attr': {'class': 'btn btn-light'}}) }}
+    </div>
+    {{ form_end(formBook) }}
+
+
+{% endblock %}
