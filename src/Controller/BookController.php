@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class BookController extends Controller
 {
@@ -16,6 +17,7 @@ class BookController extends Controller
      * @Template("book/bookIndex.html.twig")
      * @return array
      * @param Request $request
+     * @Security("has_role('ROLE_USER')")
      */
     public function bookIndexAction(Request $request)
     {
@@ -38,6 +40,7 @@ class BookController extends Controller
      * @Template("book/newBook.html.twig")
      * @param Request $request
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function newBookAction(Request $request)
     {
@@ -70,6 +73,7 @@ class BookController extends Controller
      * @Template("book/detailsBook.html.twig")
      * @param Book $book
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @Security("has_role('ROLE_USER')")
      */
     public function detailsBookAction(Book $book)
     {
@@ -89,6 +93,7 @@ class BookController extends Controller
      * @param Book $book
      * @param Request $request
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function updateBookAction(Book $book, Request $request)
     {
@@ -114,6 +119,7 @@ class BookController extends Controller
      * @Route("/delete-book/{id}", name="delete_book")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @param Book $book
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function deleteBookAction(Book $book)
     {
@@ -131,6 +137,7 @@ class BookController extends Controller
      * @param Request $request
      * @return array
      * @Template("book/searchBook.html.twig")
+     * @Security("has_role('ROLE_USER')")
      */
     public function searchBookAction(Request $request) {
 

@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class EmployeeController extends Controller
 {
@@ -16,6 +17,7 @@ class EmployeeController extends Controller
      * @Template("employee/employeeIndex.html.twig")
      * @param Request $request
      * @return array
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function employeeIndexAction(Request $request)
     {
@@ -38,6 +40,7 @@ class EmployeeController extends Controller
      * @Template("employee/newEmployee.html.twig")
      * @param Request $request
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function newEmployeeAction(Request $request)
     {
@@ -71,6 +74,7 @@ class EmployeeController extends Controller
      * @Template("employee/detailsEmployee.html.twig")
      * @param User $user
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function detailsEmployeeAction(User $user)
     {
@@ -99,6 +103,7 @@ class EmployeeController extends Controller
     /**
      * @Route("/activate/employee/{id}", name="activate_employee")
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function undeleteAccountAction($id) {
         $user = $this->getDoctrine()->getRepository('App:User')->find($id);
@@ -116,6 +121,7 @@ class EmployeeController extends Controller
     /**
      * @Route("/reset/password/employee/{id}", name="reset_password_employee")
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function resetPasswordEmployeeAction($id) {
         $user = $this->getDoctrine()->getRepository('App:User')->find($id);
