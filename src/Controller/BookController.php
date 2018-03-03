@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Book;
+use App\Entity\Unit;
 use App\Form\BookType;
+use App\Form\UnitType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -154,4 +156,53 @@ class BookController extends Controller
             'result' => $result
         );
     }
+
+    /**
+     * @Route("/unit-book/{id}", name="unit_book")
+     * @Template("book/unitBook.html.twig")
+     * @param Book $book
+     * @param Request $request
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function unitBookAction(Book $book,Request $request)
+    {
+        $unit = new Unit();
+        $formUnit = $this->createForm(UnitType::class, $unit);
+        if($request->isMethod('POST')) {
+            $formUnit->handleRequest($request);
+            $entityManager = $this->getDoctrine()->getManager();
+            $unit->setBorrow(false);
+            $unit->setDeleted(false);
+            $unit->setBook($book->getId());
+            $entityManager->persist($unit);
+            $entityManager->flush();
+
+            return $this->redirectToRoute("unit_book", ['id' => $book->getId()]);
+        }
+        $selectUnit = $this->getDoctrine()->getManager()->getRepository(Unit::class)->selectUnits($book);
+
+        return array(
+            'formUnit' => $formUnit->createView(),
+            'book' => $book,
+            'selectUnit' => $selectUnit
+        );
+    }
+
+    /**
+     * @Route("/delete-unit-book/{id}", name="delete_unit_book")
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @param Unit $unit
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function deleteUnitBookAction(Unit $unit)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $unit->setDeleted(true);
+        $entityManager->persist($unit);
+        $entityManager->flush();
+
+        return $this->redirectToRoute("unit_book", ['id' => $unit->getBook()]);
+    }
+
 }

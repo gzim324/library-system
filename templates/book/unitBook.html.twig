@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Library|Unit{% endblock %}
+
+{% block body %}
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('details_book', {"id": book.id}) }}">Details</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('update_book', {"id": book.id}) }}">Edit</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('delete_book', {"id": book.id}) }}">Delete</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <form class="form-inline">
+    {{ form_start(formUnit, {"attr": {"novalidate": "novalidate"}}) }}
+        <div class="form-group mb-4">
+            {{ form_widget(formUnit.unit, {'attr': {'placeholder': 'add numer of the book'}}) }} &nbsp;
+            {{ form_widget(formUnit.submit, {'attr': {'class': 'btn btn-light'}}) }}
+        </div>
+    {{ form_end(formUnit) }}
+    </form>
+
+    <table class="table table-bordered">
+        {% for unit in selectUnit %}
+            <tr>
+                <td>{{ unit.unit }}</td>
+                {% if unit.borrow == false %}
+                    <td>Available</td>
+                {% else %}
+                    <td>Borrowed</td>
+                {% endif %}
+                <td>
+                    <a href="{{ path('delete_unit_book', {'id': unit.id}) }}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        {% else %}
+            <p>No books</p>
+        {% endfor %}
+    </table>
+
+
+{% endblock %}

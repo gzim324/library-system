@@ -6,6 +6,9 @@
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav">
                 <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('unit_book', {"id": book.id}) }}">Units</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ path('update_book', {"id": book.id}) }}">Edit</a>
                 </li>
                 <li class="nav-item">
