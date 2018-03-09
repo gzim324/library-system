@@ -20,14 +20,13 @@
         </div>
     </nav>
 
-    <form class="form-inline">
     {{ form_start(formUnit, {"attr": {"novalidate": "novalidate"}}) }}
         <div class="form-group mb-4">
             {{ form_widget(formUnit.unit, {'attr': {'placeholder': 'add numer of the book'}}) }} &nbsp;
             {{ form_widget(formUnit.submit, {'attr': {'class': 'btn btn-light'}}) }}
         </div>
     {{ form_end(formUnit) }}
-    </form>
+
 
     <table class="table table-bordered">
         {% for unit in selectUnit %}

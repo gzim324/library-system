@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -32,8 +31,9 @@ class Book
     private $author;
 
     /**
-     * @ORM\Column(name="category", type="string", length=50)
      * @Assert\NotBlank(message="This field cannot be blank")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="books")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     private $category;
 
@@ -104,7 +104,7 @@ class Book
     }
 
     /**
-     * @return mixed
+     * @return Category
      */
     public function getCategory()
     {
@@ -112,11 +112,14 @@ class Book
     }
 
     /**
-     * @param mixed $category
+     * @param Category $category
+     * @return $this
      */
-    public function setCategory($category)
+    public function setCategory(Category $category)
     {
         $this->category = $category;
+
+        return $this;
     }
 
     /**

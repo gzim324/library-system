@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Category</h1>
+
+    <div class="col-lg-4">
+        {{ form_start(formCategory, {"attr": {"novalidate": "novalidate"}}) }}
+        <div class="form-group mb-4">
+            {{ form_widget(formCategory.name, {'attr': {'placeholder': 'new name of category'}}) }} &nbsp;
+            {{ form_widget(formCategory.save, {'attr': {'class': 'btn btn-light'}}) }}
+        </div>
+        {{ form_end(formCategory) }}
+    </div>
+
+
+    <table class="table table-bordered">
+        {% for category in resultFormCategory %}
+            <tr>
+                <td>{{ category.id }}</td>
+                <td>{{ category.name }}</td>
+                <td>
+                    <a href="{{ path('remove_category', {'id': category.id}) }}" class="btn btn-danger">Delete</a>
+                    <a href="{{ path('edit_category', {'id': category.id}) }}" class="btn btn-warning">Edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Book;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -18,7 +19,13 @@ class BookType extends AbstractType
         $builder
             ->add('title', TextType::class)
             ->add('author', TextType::class)
-            ->add('category', TextType::class)
+            ->add('category', EntityType::class, array(
+                'class' => 'App\Entity\Category',
+                'choice_label' => function($type){
+                    return $type->getName();
+                },
+                'required'   => false,
+            ))
             ->add('isbn', TextType::class)
             ->add('file', FileType::class)
             ->add('description', TextareaType::class, array('attr' => array('rows' => '8')))

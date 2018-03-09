@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Book;
+use App\Entity\Category;
 use App\Entity\Unit;
 use App\Form\BookType;
 use App\Form\UnitType;
@@ -47,6 +48,9 @@ class BookController extends Controller
     public function newBookAction(Request $request)
     {
         $book = new Book();
+
+//        $category = new Category();
+//        $category->setName('AI');
 
         $formBook = $this->createForm(BookType::class, $book);
 
