@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Book;
+use App\Repository\CategoryRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -21,6 +22,11 @@ class BookType extends AbstractType
             ->add('author', TextType::class)
             ->add('category', EntityType::class, array(
                 'class' => 'App\Entity\Category',
+                'query_builder' => function (CategoryRepository $er) {
+                    return $er->createQueryBuilder('c')
+                        ->where('c.deleted = :status')
+                        ->setParameter('status', false);
+                },
                 'choice_label' => function($type){
                     return $type->getName();
                 },
