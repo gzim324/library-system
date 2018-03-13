@@ -36,4 +36,16 @@ class UnitRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function borrowedUnits()
+    {
+        return $this->createQueryBuilder('unit')
+            ->where('unit.borrow = :status')
+            ->setParameter('status', true)
+            ->andWhere('unit.deleted = :status')
+            ->setParameter('status', false)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

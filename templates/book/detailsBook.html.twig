@@ -8,12 +8,14 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ path('unit_book', {"id": book.id}) }}">Units</a>
                 </li>
+            {% if is_granted('ROLE_ADMIN') %}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('update_book', {"id": book.id}) }}">Edit</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('delete_book', {"id": book.id}) }}">Delete</a>
                 </li>
+                {% endif %}
             </ul>
         </div>
     </nav>

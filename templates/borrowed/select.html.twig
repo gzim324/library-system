@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <table class="table table-bordered">
+        <tr>
+            <td>Unit number</td>
+            <td>Book number</td>
+        </tr>
+    {% for unit in selectBorrowedUnits %}
+        <tr>
+            <td><a href="{{ path('details_borrowed', {"id": unit.id}) }}" class="btn btn-link">{{ unit.unit }}</a></td>
+            <td>{{ unit.book }}</td>
+        </tr>
+    {% else %}
+        <p>No books</p>
+    {% endfor %}
+    </table>
+
+{% endblock %}

@@ -29,7 +29,11 @@
                             INACTIVE
                         {% endif %}
                     </td>
-                    <td><a href="{{ path('details_employee', {'id': user.id}) }}" class="btn btn-outline-secondary">Details</a></td>
+                    {% if user.username == 'admin' %}
+                        <td></td>
+                    {% else %}
+                        <td><a href="{{ path('details_employee', {'id': user.id}) }}" class="btn btn-outline-secondary">Details</a></td>
+                    {% endif %}
                     </tr>
             {% endfor %}
         </tbody>

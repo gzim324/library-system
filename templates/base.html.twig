@@ -21,7 +21,8 @@
                     <a class="nav-link" href="{{ path('employee_index') }}">EMPLOYEE</a>
                 </li>
             </ul>
-            <a class="nav-link" href="{{ path('fos_user_security_logout') }}">logout</a>
+            <a href="{{ path('user_settings', {"id": app.user.id}) }}">{{ app.user.username }}</a>
+            <a class="nav-link" href="{{ path('fos_user_security_logout') }}"><img src="{{ asset('logout.png') }}" width="20" alt="log-out"></a>
         </div>
     </nav>
 {% elseif is_granted('ROLE_USER') %}
@@ -38,10 +39,11 @@
                     <a class="nav-link" href="#">READER</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">BORROWED</a>
+                    <a class="nav-link" href="{{ path('select_borrowed') }}">BORROWED</a>
                 </li>
             </ul>
-            <a class="nav-link" href="{{ path('fos_user_security_logout') }}">logout</a>
+            <a href="{{ path('user_settings', {"id": app.user.id}) }}">{{ app.user.username }}</a>
+            <a class="nav-link" href="{{ path('fos_user_security_logout') }}"><img src="{{ asset('logout.png') }}" width="20" alt="log-out"></a>
         </div>
     </nav>
 {% endif %}
