@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -62,6 +63,17 @@ class Book
      * @Assert\File
      */
     protected $file;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Unit", mappedBy="book")
+     * @ORM\JoinColumn(name="book_id", referencedColumnName="id")
+     */
+    private $unit;
+
+    public function __construct()
+    {
+        $this->unit = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -197,15 +209,30 @@ class Book
     }
 
     /**
-     * @param mixed $file
-     * @return Book
+     * @return Unit[]|ArrayCollection
      */
-    public function setFile($file)
+    public function getUnit()
     {
-        $this->file = $file;
+        return $this->unit;
+    }
+
+    /**
+     * @param Unit $unit
+     * @return $this
+     */
+    public function addUnit(Unit $unit)
+    {
+        $this->unit[] = $unit;
         return $this;
     }
 
+    /**
+     * @param mixed $unit
+     */
+    public function setUnit($unit): void
+    {
+        $this->unit = $unit;
+    }
 
     public function getAbsolutePath()
     {

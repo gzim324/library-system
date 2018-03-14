@@ -5,16 +5,20 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('unit_book', {"id": book.id}) }}">Units</a>
-                </li>
-            {% if is_granted('ROLE_ADMIN') %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('update_book', {"id": book.id}) }}">Edit</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('delete_book', {"id": book.id}) }}">Delete</a>
-                </li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path('unit_book', {"id": book.id}) }}">Units</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('update_book', {"id": book.id}) }}">Edit</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('delete_book', {"id": book.id}) }}">Delete</a>
+                    </li>
+                {% elseif is_granted('ROLE_USER') %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path('unit_book_user', {"id": book.id}) }}">Units</a>
+                    </li>
                 {% endif %}
             </ul>
         </div>

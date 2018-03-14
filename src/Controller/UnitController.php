@@ -21,7 +21,7 @@ class UnitController extends Controller
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function unitBookAction(Book $book, Request $request)
+    public function unitBookAction(Book $book, Request $request, $id)
     {
         $unit = new Unit();
         $formUnit = $this->createForm(UnitType::class, $unit);
@@ -30,7 +30,7 @@ class UnitController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $unit->setBorrow(false);
             $unit->setDeleted(false);
-            $unit->setBook($book->getId());
+            $unit->setBook($this->getDoctrine()->getRepository(Book::class)->find($id));
             $entityManager->persist($unit);
             $entityManager->flush();
 
@@ -39,7 +39,7 @@ class UnitController extends Controller
         $selectUnit = $this->getDoctrine()->getManager()->getRepository(Unit::class)->selectUnits($book);
 
         return array(
-            'formUnit' => $formUnit->createView(),
+            'formUnit' => isset($formUnit) ? $formUnit->createView() : NULL,
             'book' => $book,
             'selectUnit' => $selectUnit
         );
@@ -62,7 +62,7 @@ class UnitController extends Controller
     }
 
     /**
-     * @Route("/unit-book/{id}", name="unit_book")
+     * @Route("/unit-book/{id}", name="unit_book_user")
      * @Template("unit/unitBookUser.html.twig")
      * @param Book $book
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse

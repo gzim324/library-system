@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,7 +18,7 @@ class Unit
     private $id;
 
     /**
-     * @ORM\Column(name="book", type="string")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Book", inversedBy="unit")
      */
     private $book;
 
@@ -106,6 +107,11 @@ class Unit
     public function setDeleted($deleted)
     {
         $this->deleted = $deleted;
+    }
+
+    public function __toString()
+    {
+        return (string) $this->getBook();
     }
 
 }

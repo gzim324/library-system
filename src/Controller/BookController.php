@@ -3,10 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Book;
-use App\Entity\Category;
-use App\Entity\Unit;
 use App\Form\BookType;
-use App\Form\UnitType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -49,9 +46,6 @@ class BookController extends Controller
     {
         $book = new Book();
 
-//        $category = new Category();
-//        $category->setName('AI');
-
         $formBook = $this->createForm(BookType::class, $book);
 
         $formBook->handleRequest($request);
@@ -59,7 +53,7 @@ class BookController extends Controller
             if($formBook->isValid()) {
                 $entityManager = $this->getDoctrine()->getManager();
                 $book->upload();
-                $book->setDeleted(0);
+                $book->setDeleted(false);
                 $entityManager->persist($book);
                 $entityManager->flush();
 
@@ -83,7 +77,7 @@ class BookController extends Controller
      */
     public function detailsBookAction(Book $book)
     {
-        if($book->getDeleted() == 1) {
+        if($book->getDeleted() == true) {
             $this->addFlash("error", "This book does not exist");
             return $this->redirectToRoute("book_index");
         }
@@ -131,7 +125,7 @@ class BookController extends Controller
     {
         $entityManager = $this->getDoctrine()->getManager();
         $book->upload();
-        $book->setDeleted(1);
+        $book->setDeleted(true);
         $entityManager->persist($book);
         $entityManager->flush();
 

@@ -38,7 +38,6 @@ class SettingsController extends Controller
             return $this->redirectToRoute("message_index");
         }
 
-
         return array(
             'formSettings' => $formSettings->createView()
         );

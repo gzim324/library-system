@@ -9,7 +9,7 @@
     {% for unit in selectBorrowedUnits %}
         <tr>
             <td><a href="{{ path('details_borrowed', {"id": unit.id}) }}" class="btn btn-link">{{ unit.unit }}</a></td>
-            <td>{{ unit.book }}</td>
+            {#<td>{{ book.title }}</td>#}
         </tr>
     {% else %}
         <p>No books</p>
