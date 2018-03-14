@@ -40,8 +40,8 @@ class UnitRepository extends ServiceEntityRepository
     public function borrowedUnits()
     {
         return $this->createQueryBuilder('unit')
-            ->where('unit.borrow = :status')
-            ->setParameter('status', true)
+            ->where('unit.borrow = :borrow')
+            ->setParameter("borrow", true)
             ->andWhere('unit.deleted = :status')
             ->setParameter('status', false)
             ->getQuery()

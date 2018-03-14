@@ -3,13 +3,13 @@
 {% block body %}
     <table class="table table-bordered">
         <tr>
-            <td>Unit number</td>
-            <td>Book number</td>
+            <td>Unit</td>
+            <td>Book</td>
         </tr>
     {% for unit in selectBorrowedUnits %}
         <tr>
             <td><a href="{{ path('details_borrowed', {"id": unit.id}) }}" class="btn btn-link">{{ unit.unit }}</a></td>
-            {#<td>{{ book.title }}</td>#}
+            <td><a href="{{ path('details_book', {"id": unit.book.id}) }}" class="btn btn-link">{{ unit.book.title }}</a></td>
         </tr>
     {% else %}
         <p>No books</p>
