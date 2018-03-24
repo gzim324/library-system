@@ -27,7 +27,7 @@ class BookRepository extends ServiceEntityRepository
         return $this->createQueryBuilder("book")
             ->where("book.deleted = :false")
             ->setParameter("false", 0)
-            ->orderBy("book.id", "DESC")
+            ->orderBy("book.id", "ASC")
             ->getQuery()
             ->getResult();
     }

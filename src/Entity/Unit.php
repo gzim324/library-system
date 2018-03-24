@@ -38,6 +38,11 @@ class Unit
     private $deleted;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Reader", inversedBy="unit")
+     */
+    private $reader;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -112,6 +117,25 @@ class Unit
     public function __toString()
     {
         return (string) $this->getBook();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getReader()
+    {
+        return $this->reader;
+    }
+
+    /**
+     * @param Reader $reader
+     * @return $this
+     */
+    public function setReader(Reader $reader)
+    {
+        $this->reader = $reader;
+
+        return $this;
     }
 
 }

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+    {% for reader in readers %}
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ reader.fullname }}</h5>
+                    <p class="card-text">{{ reader.email }}<br> {{ reader.phone }}</p>
+                    <a href="#details" class="btn btn-primary">Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+        <div class="card">
+            <div class="card-body">
+                No readers
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}
