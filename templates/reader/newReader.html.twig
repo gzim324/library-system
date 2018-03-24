@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Library|New Reader{% endblock %}
+
+{% block body %}
+
+    <div class="col-lg-5">
+        <h1>new Reader</h1>
+        {{ form_start(formReader, {"attr": {"novalidate": "novalidate"}}) }}
+        <div class="form-group">
+            {{ form_widget(formReader.fullname, {'attr': {'placeholder': 'Fullname'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_widget(formReader.phone, {'attr': {'placeholder': 'Phone'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_widget(formReader.email, {'attr': {'placeholder': 'E-mail'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_widget(formReader.city, {'attr': {'placeholder': 'City'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_widget(formReader.street, {'attr': {'placeholder': 'Street'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_widget(formReader.adress, {'attr': {'placeholder': 'Adress'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_widget(formReader.zipCode, {'attr': {'placeholder': 'Zip-Code'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_widget(formReader.submit, {'attr': {'class': 'btn btn-light'}}) }}
+        </div>
+        {{ form_end(formReader) }}
+    </div>
+
+
+{% endblock %}

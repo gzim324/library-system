@@ -1,9 +1,11 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Library|Reader{% endblock %}
+
 {% block body %}
 
     <form class="form-inline" method="post" action="{{ path('search_reader') }}">
-        <a href="#" class="btn btn-outline-secondary">New Reader</a>
+        <a href="{{ path('new_reader') }}" class="btn btn-outline-secondary">New Reader</a>
         <input class="form-control" type="search" name="searchReader" placeholder="Search for reader">
     </form> <br>
 
@@ -29,11 +31,11 @@
                         </tr>
                         </table>
                     </p>
-                    <a href="#details" class="btn btn-primary">Details</a>
+                    <a href="{{ path('card_reader', {'id': reader.id}) }}" class="btn btn-primary">Details</a>
                 </div>
             </div>
         </div>
-    </div>
+    </div> <br>
     {% else %}
         <div class="card">
             <div class="card-body">

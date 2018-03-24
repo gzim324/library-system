@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Library|Search{% endblock %}
+
 {% block body %}
 
     {% for reader in result %}
@@ -8,16 +10,31 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">{{ reader.fullname }}</h5>
-                        <p class="card-text">{{ reader.email }}<br> {{ reader.phone }}</p>
-                        <a href="#details" class="btn btn-primary">Details</a>
+                        <p class="card-text">
+                        <table class="table table-sm table-bordered">
+                            <tr>
+                                <td><label><b>E-mail</b></label></td>
+                                <td>{{ reader.email }}</td>
+                            </tr>
+                            <tr>
+                                <td><label><b>Phone</b></label></td>
+                                <td>{{ reader.phone }}</td>
+                            </tr>
+                            <tr>
+                                <td><label><b>Borrowed</b> </label></td>
+                                <td>---</td>
+                            </tr>
+                        </table>
+                        </p>
+                        <a href="{{ path('card_reader', {'id': reader.id}) }}" class="btn btn-primary">Details</a>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> <br>
     {% else %}
         <div class="card">
             <div class="card-body">
-                No readers
+                No result
             </div>
         </div>
     {% endfor %}

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Reader;
+use App\Form\ReaderType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,6 +40,51 @@ class ReaderController extends Controller
 
         return array(
             'result' => $result
+        );
+    }
+
+    /**
+     * @Route("/new-reader", name="new_reader")
+     * @Template("reader/newReader.html.twig")
+     * @param Request $request
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function newReaderAction(Request $request)
+    {
+        $reader = new Reader();
+
+        $formReader = $this->createForm(ReaderType::class, $reader);
+
+        $formReader->handleRequest($request);
+        if($request->isMethod('POST')) {
+            if($formReader->isValid()) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($reader);
+                $entityManager->flush();
+
+                $formReader->getData();
+//                $this->addFlash("success", "The book has been added");
+                return $this->redirectToRoute("card_reader", ['id' => $reader->getId()]);
+            }
+        }
+
+        return array(
+            'formReader' => isset($formReader) ? $formReader->createView() : NULL
+        );
+    }
+
+    /**
+     * @Route("/card-reader/{id}", name="card_reader")
+     * @Template("reader/cardReader.html.twig")
+     * @param Reader $reader
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function cardReaderAction(Reader $reader)
+    {
+        return array(
+            'reader' => $reader
         );
     }
 

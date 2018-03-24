@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Library|Reader|{{ reader.fullname }}{% endblock %}
+
+{% block body %}
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h2>{{ reader.fullname }}</h2>
+                <label><b>Phone</b></label> {{ reader.phone }}    <br>
+                <label><b>E-mail</b></label> {{ reader.email }}   <br>
+                <label><b>City</b></label> {{ reader.city }}      <br>
+                <label><b>Street</b></label> {{ reader.street }}  <br>
+                <label><b>Adress</b></label> {{ reader.adress }}  <br>
+                <label><b>Zip-Code</b></label> {{ reader.zipCode }}
+            </div>
+        </div>
+    </div> <br>
+
+    <h3>Borrowed:</h3>
+
+
+{% endblock %}
