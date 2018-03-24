@@ -15,7 +15,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('delete_book', {"id": book.id}) }}">Delete</a>
                     </li>
-                {% elseif is_granted('ROLE_USER') %}
+                {% else %}
                     <li class="nav-item active">
                         <a class="nav-link" href="{{ path('unit_book_user', {"id": book.id}) }}">Units</a>
                     </li>

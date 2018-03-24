@@ -14,7 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class UnitController extends Controller
 {
     /**
-     * @Route("/unit-book/{id}", name="unit_book")
+     * @Route("/unit/book/{id}", name="unit_book")
      * @Template("unit/unitBook.html.twig")
      * @param Book $book
      * @param Request $request
