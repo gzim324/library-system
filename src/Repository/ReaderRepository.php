@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Reader;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @method Reader|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,16 +20,18 @@ class ReaderRepository extends ServiceEntityRepository
         parent::__construct($registry, Reader::class);
     }
 
-    /*
-    public function findBySomething($value)
-    {
-        return $this->createQueryBuilder('r')
-            ->where('r.something = :value')->setParameter('value', $value)
-            ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
+    /**
+     * @param Request $request
+     * @return array
+     */
+    public function searchReader(Request $request) {
+        return $this->createQueryBuilder('reader')
+            ->where('reader.fullname LIKE :search')
+            ->orWhere('reader.email LIKE :search')
+            ->orWhere('reader.phone LIKE :search')
+            ->orWhere('reader.city LIKE :search')
+            ->setParameter('search', '%'.$request->get('searchReader').'%')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
 }

@@ -2,14 +2,33 @@
 
 {% block body %}
 
+    <form class="form-inline" method="post" action="{{ path('search_reader') }}">
+        <a href="#" class="btn btn-outline-secondary">New Reader</a>
+        <input class="form-control" type="search" name="searchReader" placeholder="Search for reader">
+    </form> <br>
 
-    {% for reader in readers %}
+    {% for reader in result %}
     <div class="row">
         <div class="col-sm-6">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">{{ reader.fullname }}</h5>
-                    <p class="card-text">{{ reader.email }}<br> {{ reader.phone }}</p>
+                    <p class="card-text">
+                        <table class="table table-sm table-bordered">
+                        <tr>
+                            <td><label><b>E-mail</b></label></td>
+                            <td>{{ reader.email }}</td>
+                        </tr>
+                        <tr>
+                            <td><label><b>Phone</b></label></td>
+                            <td>{{ reader.phone }}</td>
+                        </tr>
+                        <tr>
+                            <td><label><b>Borrowed</b> </label></td>
+                            <td>---</td>
+                        </tr>
+                        </table>
+                    </p>
                     <a href="#details" class="btn btn-primary">Details</a>
                 </div>
             </div>
@@ -22,5 +41,8 @@
             </div>
         </div>
     {% endfor %}
+    <div class="navigation">
+        {{ knp_pagination_render(result) }}
+    </div>
 
 {% endblock %}
