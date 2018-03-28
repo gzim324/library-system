@@ -5,11 +5,15 @@
         <tr>
             <td>Unit</td>
             <td>Book</td>
+            <td>Reader</td>
+            <td>Deadline</td>
         </tr>
     {% for unit in selectBorrowedUnits %}
         <tr>
             <td><a href="{{ path('details_borrowed', {"id": unit.id}) }}" class="btn btn-link">{{ unit.unit }}</a></td>
             <td><a href="{{ path('details_book', {"id": unit.book.id}) }}" class="btn btn-link">{{ unit.book.title }}</a></td>
+            <td><a href="{{ path('card_reader', {"id": unit.reader.id}) }}">{{ unit.reader.fullname }}</a></td>
+            <td>{{ unit.deadline|date("d M Y") }}</td>
         </tr>
     {% else %}
         <p>No books</p>

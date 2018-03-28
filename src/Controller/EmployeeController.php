@@ -21,6 +21,7 @@ class EmployeeController extends Controller
      */
     public function employeeIndexAction(Request $request)
     {
+        $user = new User();
         $selectUsers = $this->getDoctrine()->getManager()->getRepository('App:User')->findAll();
 
         $paginator = $this->get('knp_paginator');
@@ -86,6 +87,7 @@ class EmployeeController extends Controller
     /**
      * @Route("/deactivate/employee/{id}", name="deactivate_employee")
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function deleteAccountAction($id) {
         $user = $this->getDoctrine()->getRepository('App:User')->find($id);

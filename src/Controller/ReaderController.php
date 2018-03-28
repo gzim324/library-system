@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Reader;
+use App\Entity\Unit;
 use App\Form\ReaderType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -39,7 +40,7 @@ class ReaderController extends Controller
         );
 
         return array(
-            'result' => $result
+            'result' => $result,
         );
     }
 
@@ -78,13 +79,17 @@ class ReaderController extends Controller
      * @Route("/card-reader/{id}", name="card_reader")
      * @Template("reader/cardReader.html.twig")
      * @param Reader $reader
+     * @param Unit $unit
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      * @Security("has_role('ROLE_USER')")
      */
-    public function cardReaderAction(Reader $reader)
+    public function cardReaderAction(Reader $reader, Unit $unit)
     {
+        $borrowedBook = $this->getDoctrine()->getManager()->getRepository('App:Unit')->borrowedBook($unit);
+
         return array(
-            'reader' => $reader
+            'reader' => $reader,
+            'borrowedBook' => $borrowedBook
         );
     }
 

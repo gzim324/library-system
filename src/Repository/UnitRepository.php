@@ -48,4 +48,23 @@ class UnitRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
+
+    public function borrowedBook(Unit $unit)
+    {
+        return $this->createQueryBuilder('unit')
+            ->where('unit.reader = :reader')
+            ->setParameter("reader", $unit->getReader())
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+//    public function howMuch(Unit $unit)
+//    {
+//        return $this->createQueryBuilder('unit')
+//            ->where('unit.reader = :reader')
+//            ->setParameter("reader", $unit->getReader())
+//
+//            ;
+//    }
 }

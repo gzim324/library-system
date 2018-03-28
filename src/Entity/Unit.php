@@ -43,11 +43,21 @@ class Unit
     private $reader;
 
     /**
+     * @ORM\Column(name="deadline", type="datetime", nullable=true)
+     */
+    private $deadline;
+
+    /**
      * @return mixed
      */
     public function getId()
     {
         return $this->id;
+    }
+
+    public function __toString()
+    {
+        return (string) $this->getBook();
     }
 
     /**
@@ -114,11 +124,6 @@ class Unit
         $this->deleted = $deleted;
     }
 
-    public function __toString()
-    {
-        return (string) $this->getBook();
-    }
-
     /**
      * @return mixed
      */
@@ -136,6 +141,22 @@ class Unit
         $this->reader = $reader;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDeadline()
+    {
+        return $this->deadline;
+    }
+
+    /**
+     * @param mixed $deadline
+     */
+    public function setDeadline($deadline): void
+    {
+        $this->deadline = $deadline;
     }
 
 }
