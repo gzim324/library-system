@@ -58,7 +58,6 @@ class BookController extends Controller
                 $entityManager->flush();
 
                 $formBook->getData();
-//                $this->addFlash("success", "The book has been added");
                 return $this->redirectToRoute("details_book", ['id' => $book->getId()]);
             }
         }

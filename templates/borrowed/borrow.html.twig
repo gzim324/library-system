@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="col-lg-8">
+        <center>
+        <div class="card">
+            <h5 class="card-header">{{ unit.unit }}</h5>
+            <div class="card-body">
+
+                <p class="card-title">{{ unit.book.title }}</p>
+                <p class="card-title">{{ unit.book.author }}</p>
+                <p class="card-title">{{ unit.book.isbn }}</p>
+                {{ form_start(formBorrow, {"attr": {"novalidate": "novalidate"}}) }}
+                <div class="form-group">
+                    {{ form_widget(formBorrow.deadline) }}
+                </div>
+                <div class="form-group">
+                    {{ form_widget(formBorrow.reader) }}
+                </div>
+                <div class="form-group">
+                    {{ form_widget(formBorrow.save, {'attr': {'class': 'btn btn-light'}}) }}
+                </div>
+                {{ form_end(formBorrow) }}
+            </div>
+        </div>
+        </center>
+    </div>
+
+{% endblock %}

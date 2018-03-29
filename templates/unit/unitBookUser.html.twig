@@ -20,7 +20,7 @@
                 <td>{{ unit.unit }}</td>
                 {% if unit.borrow == false %}
                     <td>Available</td>
-                    <td><a href="#" class="btn btn-dark">Wypożycz</a></td>
+                    <td><a href="{{ path('borrow-book', {'id': unit.id}) }}" class="btn btn-dark">Wypożycz</a></td>
                 {% else %}
                     <td>Borrowed</td>
                     <td><a href="#" class="btn btn-dark">Oddaj</a></td>
