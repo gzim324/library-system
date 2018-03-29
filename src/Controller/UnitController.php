@@ -77,4 +77,38 @@ class UnitController extends Controller
             'book' => $book
         );
     }
+
+    /**
+     * @Route("/give-book/{id}", name="give_unit")
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @param Unit $unit
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function giveUnitAction(Unit $unit)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $unit->setBorrow(false);
+        $unit->setReader(null);
+        $unit->setDeadline(null);
+        $entityManager->persist($unit);
+        $entityManager->flush();
+
+        return $this->redirectToRoute("unit_book", ['id' => $unit->getBook()]);
+    }
+
+    /**
+     * @Route("/borrow-book/{id}", name="borrow_unit")
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @param Unit $unit
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function borrowUnitAction(Unit $unit)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($unit);
+        $entityManager->flush();
+
+        return $this->redirectToRoute("unit_book", ['id' => $unit->getBook()]);
+    }
+
 }

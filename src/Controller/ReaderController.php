@@ -13,14 +13,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class ReaderController extends Controller
 {
-    /*
-     * dodaj usera
-     * selectuj userow    ok
-     * szukaj po imieniu, nazwisko i innych statycznych danych   ok
-     * karta usera
-     */
-
-
     /**
      * @Route("/reader", name="reader_index")
      * @Template("reader/select.html.twig")

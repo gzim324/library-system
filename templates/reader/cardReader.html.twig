@@ -20,19 +20,18 @@
 
     <h3>Borrowed:</h3>
 
-    <div class="card" style="width: 18rem;">
+    <div class="card" style="width: 40rem;">
         <ul class="list-group list-group-flush">
             {% for unit in borrowedBook %}
                 <li class="list-group-item">
-                    <a href="{{ path('details_book', {'id': unit.book.id}) }}">{{ unit.book.title }}({{ unit.id }})</a>
+                    <a href="{{ path('details_book', {'id': unit.book.id}) }}">{{ unit.book.title }} ({{ unit.unit }})</a>
+                    - {{ unit.deadline|date("d M Y") }}
                 </li>
             {% else %}
                 <li class="list-group-item">No Books</li>
             {% endfor %}
         </ul>
     </div>
-        {#<a href="{{ path('details_borrowed', {'id': unit.id}) }}" class="btn btn-dark">{{ unit.id }}</a> <br>#}
-        {#<a href="{{ path('details_borrowed', {'id': unit.id}) }}" class="btn btn-dark">{{ unit.id }}</a> <br>#}
 
 
 {% endblock %}

@@ -53,18 +53,9 @@ class UnitRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('unit')
             ->where('unit.reader = :reader')
-            ->setParameter("reader", $unit->getReader())
+            ->setParameter("reader", $unit->getId())
             ->getQuery()
             ->getResult()
             ;
     }
-
-//    public function howMuch(Unit $unit)
-//    {
-//        return $this->createQueryBuilder('unit')
-//            ->where('unit.reader = :reader')
-//            ->setParameter("reader", $unit->getReader())
-//
-//            ;
-//    }
 }
