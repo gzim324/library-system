@@ -1,13 +1,24 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-    <h3>{{ unit.id }}</h3>
-    <p>{{ unit.book.title }}</p>
-    <p>{{ unit.book.author }}</p>
-    <p>{{ unit.book.isbn }}</p>
-    <p>{{ unit.book.category }}</p>
-    <a href="{{ path('card_reader', {'id': unit.reader.id}) }}">{{ unit.reader.fullname }}</a>
-
-
+    <center>
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5>{{ unit.unit }}</h5>
+                </div>
+                <div class="card-body">
+                    <img class="img-responsive" src="{{ asset('books/'~unit.book.path) }}" alt="{{ unit.book.path }}" width="200"> <br><br>
+                    <h5>{{ unit.book.title }}</h5>
+                    <p><b>Author:</b> {{ unit.book.author }}</p>
+                    <p><b>ISBN:</b> {{ unit.book.isbn }}</p>
+                    <p><b>Category:</b> {{ unit.book.category }}</p>
+                    <p><b>Deadline:</b> {{ unit.deadline|date('d M Y') }}</p>
+                    <a href="{{ path('card_reader', {'id': unit.reader.id}) }}" class="btn btn-link">{{ unit.reader.fullname }}</a>
+                    <br> <br>
+                    <td><a href="{{ path('give', {'id': unit.id, 'reader': unit.reader.id}) }}" class="btn btn-dark">Oddaj</a></td>
+                </div>
+            </div>
+        </div>
+    </center>
 {% endblock %}

@@ -6,6 +6,7 @@ use App\Entity\Book;
 use App\Entity\Unit;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @method Unit|null find($id, $lockMode = null, $lockVersion = null)
@@ -57,5 +58,17 @@ class UnitRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
             ;
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    public function searchBorrowedUnit(Request $request) {
+        return $this->createQueryBuilder('unit')
+            ->where('unit.unit LIKE :search')
+            ->setParameter('search', '%'.$request->get('searchBorrowedUnit').'%')
+            ->getQuery()
+            ->getResult();
     }
 }

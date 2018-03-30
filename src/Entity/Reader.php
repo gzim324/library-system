@@ -201,4 +201,15 @@ class Reader
         return $this;
     }
 
+    /**
+     * @param Unit $unit
+     * @return $this
+     */
+    public function removeUnit(Unit $unit)
+    {
+        $this->unit->removeElement($unit);
+
+        return $this;
+    }
+
 }

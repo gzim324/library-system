@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Reader;
 use App\Entity\Unit;
 use App\Form\BorrowType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -42,21 +43,23 @@ class BorrowedController extends Controller
     }
 
     /**
-     * @Route("/give-book/{id}", name="give")
+     * @Route("/give-book/{id}/{reader}", name="give")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @param Unit $unit
+     * @param Reader $reader
      * @Security("has_role('ROLE_USER')")
      */
-    public function giveAction(Unit $unit)
+    public function giveAction(Unit $unit, Reader $reader)
     {
         $entityManager = $this->getDoctrine()->getManager();
+
         $unit->setBorrow(false);
-        $unit->setReader(null);
         $unit->setDeadline(null);
+        $reader->removeUnit($unit);
         $entityManager->persist($unit);
         $entityManager->flush();
 
-        return $this->redirectToRoute("unit_book", ['id' => $unit->getBook()]);
+        return $this->redirectToRoute("unit_book_user", ['id' => $unit->getBook()->getId()]);
     }
 
     /**
@@ -81,13 +84,29 @@ class BorrowedController extends Controller
                 $em->persist($unit);
                 $em->flush();
 
-                return $this->redirectToRoute("select_borrowed");
+                return $this->redirectToRoute("details_borrowed", ['id' => $unit->getBorrow()]);
             }
         }
 
         return array(
             'formBorrow' => isset($formBorrow) ? $formBorrow->createView() : NULL,
             'unit' => $unit
+        );
+    }
+
+    /**
+     * @Route("/search-unit", name="searchBorrowedUnit")
+     * @param Request $request
+     * @return array
+     * @Template("borrowed/searchBorrowedUnit.html.twig")
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function searchBorrowedUnitAction(Request $request) {
+
+        $search_borrowed_unit = $this->getDoctrine()->getManager()->getRepository('App:Unit')->searchBorrowedUnit($request);
+
+        return array(
+            'result' => $search_borrowed_unit
         );
     }
 }

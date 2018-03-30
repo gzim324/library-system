@@ -23,7 +23,7 @@
                     <td><a href="{{ path('borrow-book', {'id': unit.id}) }}" class="btn btn-dark">Wypożycz</a></td>
                 {% else %}
                     <td>Borrowed</td>
-                    <td><a href="#" class="btn btn-dark">Oddaj</a></td>
+                    <td><a href="{{ path('details_borrowed', {'id': unit.id}) }}" class="btn btn-dark">Show</a></td>
                 {% endif %}
             </tr>
         {% else %}

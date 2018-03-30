@@ -2,18 +2,14 @@
 
 {% block body %}
 
-    <form class="form-inline" method="post" action="{{ path('searchBorrowedUnit') }}">
-        <input class="form-control" type="search" name="searchBorrowedUnit" placeholder="Search for Unit">
-    </form> <br>
-
     <table class="table table-bordered">
-        <tr>
-            <td>Unit</td>
-            <td>Book</td>
-            <td>Reader</td>
-            <td>Deadline</td>
-        </tr>
-    {% for unit in selectBorrowedUnits %}
+    <tr>
+        <td>Unit</td>
+        <td>Book</td>
+        <td>Reader</td>
+        <td>Deadline</td>
+    </tr>
+    {% for unit in result %}
         <tr>
             <td><a href="{{ path('details_borrowed', {"id": unit.id}) }}" class="btn btn-link">{{ unit.unit }}</a></td>
             <td><a href="{{ path('details_book', {"id": unit.book.id}) }}" class="btn btn-link">{{ unit.book.title }}</a></td>
@@ -21,7 +17,7 @@
             <td>{{ unit.deadline|date("d M Y") }}</td>
         </tr>
     {% else %}
-        <p>No books</p>
+        <h2>No results found</h2>
     {% endfor %}
     </table>
 

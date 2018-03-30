@@ -24,7 +24,7 @@
         <ul class="list-group list-group-flush">
             {% for unit in borrowedBook %}
                 <li class="list-group-item">
-                    <a href="{{ path('details_book', {'id': unit.book.id}) }}">{{ unit.book.title }} ({{ unit.unit }})</a>
+                    <a href="{{ path('details_borrowed', {"id": unit.id}) }}">{{ unit.book.title }} ({{ unit.unit }})</a>
                     - {{ unit.deadline|date("d M Y") }}
                 </li>
             {% else %}
