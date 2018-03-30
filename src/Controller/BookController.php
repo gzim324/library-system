@@ -97,14 +97,12 @@ class BookController extends Controller
     public function updateBookAction(Book $book, Request $request)
     {
         $formBook = $this->createForm(BookType::class, $book);
+        $formBook->handleRequest($request);
         if($request->isMethod('POST')) {
-            $formBook->handleRequest($request);
             $entityManager = $this->getDoctrine()->getManager();
             $book->upload();
             $entityManager->persist($book);
             $entityManager->flush();
-
-//            $this->addFlash("success", "The book has been updated");
 
             return $this->redirectToRoute("details_book", ['id' => $book->getId()]);
         }

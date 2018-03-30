@@ -58,7 +58,7 @@ class UnitController extends Controller
         $entityManager->persist($unit);
         $entityManager->flush();
 
-        return $this->redirectToRoute("unit_book", ['id' => $unit->getBook()]);
+        return $this->redirectToRoute("book_index");
     }
 
     /**

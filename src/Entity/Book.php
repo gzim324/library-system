@@ -62,7 +62,7 @@ class Book
     /**
      * @Assert\File
      */
-    protected $file;
+    public $file;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Unit", mappedBy="book")

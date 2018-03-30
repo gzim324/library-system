@@ -34,12 +34,15 @@
                 <td>{{ unit.unit }}</td>
                 {% if unit.borrow == false %}
                     <td>Available</td>
+                    <td>
+                        <a href="{{ path('delete_unit', {'id': unit.id}) }}" class="btn btn-danger">Delete</a>
+                    </td>
                 {% else %}
                     <td>Borrowed</td>
+                    <td>
+                        <button type="button" class="btn btn-danger disabled" disabled>Delete</button>
+                    </td>
                 {% endif %}
-                <td>
-                    <a href="{{ path('delete_unit', {'id': unit.id}) }}" class="btn btn-danger">Delete</a>
-                </td>
             </tr>
         {% else %}
             <p>No books</p>
