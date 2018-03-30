@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Form\FormInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ReaderRepository")
@@ -203,13 +204,13 @@ class Reader
 
     /**
      * @param Unit $unit
-     * @return $this
+     * @return null
      */
     public function removeUnit(Unit $unit)
     {
         $this->unit->removeElement($unit);
 
-        return $this;
+        return $this->unit;
     }
 
 }

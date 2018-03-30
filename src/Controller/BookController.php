@@ -123,7 +123,7 @@ class BookController extends Controller
     public function deleteBookAction(Book $book)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $book->upload();
+//        $book->upload();
         $book->setDeleted(true);
         $entityManager->persist($book);
         $entityManager->flush();

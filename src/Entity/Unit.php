@@ -134,10 +134,10 @@ class Unit
     }
 
     /**
-     * @param Reader $reader
+     * @param $reader
      * @return $this
      */
-    public function setReader(Reader $reader)
+    public function setReader($reader)
     {
         $this->reader = $reader;
 
