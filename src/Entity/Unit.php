@@ -55,6 +55,11 @@ class Unit
         return $this->id;
     }
 
+    public function __toString()
+    {
+        return $this->getBook();
+    }
+
     /**
      * @return mixed
      */
@@ -152,10 +157,5 @@ class Unit
     public function setDeadline($deadline): void
     {
         $this->deadline = $deadline;
-    }
-
-    public function __toString()
-    {
-        return $this->getBook();
     }
 }

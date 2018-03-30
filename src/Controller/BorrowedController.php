@@ -85,7 +85,7 @@ class BorrowedController extends Controller
                 $em->persist($unit);
                 $em->flush();
 
-                return $this->redirectToRoute("details_borrowed", ['id' => $unit->getBorrow()]);
+                return $this->redirectToRoute('details_borrowed', ['id' => $unit->getId()]);
             }
         }
 
