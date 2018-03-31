@@ -26,6 +26,7 @@ class CategoryRepository extends ServiceEntityRepository
         return $this->createQueryBuilder("category")
             ->where("category.deleted = :false")
             ->setParameter("false", false)
+            ->orderBy('category.name', 'ASC')
             ->getQuery()
             ->getResult();
     }

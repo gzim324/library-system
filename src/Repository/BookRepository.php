@@ -28,7 +28,7 @@ class BookRepository extends ServiceEntityRepository
         return $this->createQueryBuilder("book")
             ->where("book.deleted = :false")
             ->setParameter("false", 0)
-            ->orderBy("book.id", "ASC")
+            ->orderBy("book.title", "ASC")
             ->getQuery()
             ->getResult();
     }
@@ -49,7 +49,6 @@ class BookRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-
     /**
      * @param Category $category
      * @return mixed
@@ -61,6 +60,26 @@ class BookRepository extends ServiceEntityRepository
             ->setParameter("category", $category->getId())
             ->andWhere('book.deleted = :status')
             ->setParameter('status', false)
+            ->orderBy('book.title', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @param Request $request
+     * @param Category $category
+     * @return array
+     */
+    public function inCategoryBook(Request $request, Category $category) {
+        return $this->createQueryBuilder('book')
+            ->where('book.title LIKE :search')
+            ->orWhere('book.author LIKE :search')
+            ->orWhere('book.isbn LIKE :search')
+            ->setParameter('search', '%'.$request->get('searchBook').'%')
+            ->andWhere('book.deleted = :false')
+            ->setParameter('false', 0)
+            ->andWhere('book.category = :category')
+            ->setParameter('category', $category->getId())
             ->getQuery()
             ->getResult();
     }

@@ -20,8 +20,15 @@
                 </div>
             </div>
             {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{ path('index_category') }}" class="btn btn-outline-secondary">Category</a>
-                <a href="{{ path('new_book') }}" class="btn btn-outline-secondary">New Book</a>
+                <div class="btn-group">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        New
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="{{ path('index_category') }}" class="dropdown-item">Category</a>
+                        <a href="{{ path('new_book') }}" class="dropdown-item">Book</a>
+                    </div>
+                </div>
             {% endif %}
             <input class="form-control" type="search" name="searchBook" placeholder="Search for book">
         </form> <br>
@@ -30,6 +37,7 @@
                 <img class="img-responsive" src="{{ asset('books/'~book.path) }}" alt="{{ book.path }}" width="200">
                 <div class="card-body">
                     <h5 class="card-title">{{ book.title }}</h5>
+                    <p class="card-text">({{ book.isbn }})</p>
                     <p class="card-text">{{ book.author }}</p>
                     <p class="card-text">{{ book.category }}</p>
                     <a href="{{ path('details_book', {'id': book.id}) }}" class="btn btn-primary">Details</a>

@@ -181,4 +181,28 @@ class BookController extends Controller
             'result' => $result
         );
     }
+
+//    /**
+//     * @Route("/search-book/category/{id}", name="search_book_category")
+//     * @param Request $request
+//     * @param Category $category
+//     * @return array
+//     * @Template("book/searchBookCategory.html.twig")
+//     * @Security("has_role('ROLE_USER')")
+//     */
+//    public function searchBookCategoryAction(Request $request, Category $category) {
+//
+//        $search_book = $this->getDoctrine()->getManager()->getRepository('App:Book')->inCategoryBook($request, $category);
+//
+//        $paginator = $this->get('knp_paginator');
+//        $result = $paginator->paginate(
+//            $search_book,
+//            $request->query->getInt('page', 1),
+//            $request->query->getInt('limit', 10)
+//        );
+//
+//        return array(
+//            'result' => $result
+//        );
+//    }
 }
