@@ -54,7 +54,7 @@ class Reader
     private $adress;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Unit", mappedBy="reader")
+     * @ORM\OneToMany(targetEntity="App\Entity\Unit", mappedBy="reader", cascade={"persist"})
      * @ORM\JoinColumn(name="reader_id", referencedColumnName="id")
      */
     private $unit;
@@ -199,6 +199,7 @@ class Reader
     public function addUnit(Unit $unit)
     {
         $this->unit[] = $unit;
+
         return $this;
     }
 
@@ -209,6 +210,9 @@ class Reader
     public function removeUnit(Unit $unit)
     {
         $this->unit->removeElement($unit);
+        $unit->setBorrow(false);
+        $unit->setDeadline(null);
+        $unit->setReader(null);
 
         return $this->unit;
     }

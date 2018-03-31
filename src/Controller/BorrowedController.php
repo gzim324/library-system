@@ -51,13 +51,9 @@ class BorrowedController extends Controller
      */
     public function giveAction(Unit $unit, Reader $reader)
     {
-        $reader = $this->getDoctrine()->getRepository('App:Reader')->find($reader);
         $entityManager = $this->getDoctrine()->getManager();
-        $unit->setBorrow(false);
-        $unit->setDeadline(null);
         $reader->removeUnit($unit);
-        $unit->setReader(null);
-        $entityManager->persist($unit);
+        $entityManager->persist($reader);
         $entityManager->flush();
 
         return $this->redirectToRoute("unit_book_user", ['id' => $unit->getBook()->getId()]);
@@ -76,6 +72,7 @@ class BorrowedController extends Controller
         $formBorrow = $this->createForm(BorrowType::class, $unit);
 
         $formBorrow->handleRequest($request);
+
         if($request->isMethod('POST')) {
             if($formBorrow->isValid())
             {

@@ -72,7 +72,7 @@ class BookController extends Controller
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function newBookAction(Request $request)
+    public function newBookAction(Request $request): array
     {
         $book = new Book();
 
@@ -156,7 +156,7 @@ class BookController extends Controller
         $entityManager->persist($book);
         $entityManager->flush();
 
-        return $this->redirectToRoute("book_index");
+        return $this->redirectToRoute("details_book", ["id" => $book->getId()]);
     }
 
     /**
