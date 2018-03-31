@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Book;
+use App\Entity\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,6 +45,22 @@ class BookRepository extends ServiceEntityRepository
             ->setParameter('search', '%'.$request->get('searchBook').'%')
             ->andWhere('book.deleted = :false')
             ->setParameter('false', 0)
+            ->getQuery()
+            ->getResult();
+    }
+
+
+    /**
+     * @param Category $category
+     * @return mixed
+     */
+    public function categoryBook(Category $category)
+    {
+        return $this->createQueryBuilder('book')
+            ->where('book.category = :category')
+            ->setParameter("category", $category->getId())
+            ->andWhere('book.deleted = :status')
+            ->setParameter('status', false)
             ->getQuery()
             ->getResult();
     }

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Book;
+use App\Entity\Category;
 use App\Form\BookType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,6 +24,8 @@ class BookController extends Controller
     {
         $undeleted_books = $this->getDoctrine()->getManager()->getRepository(Book::class)->undeletedBooks();
 
+        $undeleted_category = $this->getDoctrine()->getManager()->getRepository(Category::class)->undeletedCategory();
+
         $paginator = $this->get('knp_paginator');
         $result = $paginator->paginate(
             $undeleted_books,
@@ -31,7 +34,34 @@ class BookController extends Controller
         );
 
         return array(
-            'undeletedBooks' => $result
+            'undeletedBooks' => $result,
+            'category' => $undeleted_category
+        );
+    }
+
+    /**
+     * @Route("/category/{id}", name="category_book")
+     * @Template("book/bookCategory.html.twig")
+     * @Security("has_role('ROLE_USER')")
+     * @param Category $category
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function categoryBookAction(Category $category, Request $request)
+    {
+        $undeleted_category = $this->getDoctrine()->getManager()->getRepository(Category::class)->undeletedCategory();
+
+        $books = $this->getDoctrine()->getManager()->getRepository(Book::class)->categoryBook($category);
+
+        $paginator = $this->get('knp_paginator');
+        $result = $paginator->paginate(
+            $books,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 10)
+        );
+
+        return array(
+            'category' => $undeleted_category,
+            'result' => $result
         );
     }
 

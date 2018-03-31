@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {#<div class="col-lg-3">#}
+        {#<div class="btn-group-vertical">#}
+            {#<a href="{{ path('book_index') }}" class="btn btn-outline-secondary" role="button">All</a>#}
+            {#{% for category in category %}#}
+                {#<a href="{{ path('category_book', {'id': category.id}) }}" class="btn btn-outline-secondary" role="button">{{ category.name }}</a>#}
+            {#{% else %}#}
+                {#<button type="button"  class="btn btn-secondary">The database does not have any category yet</button>#}
+            {#{% endfor %}#}
+        {#</div>#}
+    {#</div>#}
+
+    <div class="btn-group">
+        <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Category
+        </button>
+        <div class="dropdown-menu">
+            <a href="{{ path('book_index') }}" class="dropdown-item" role="button">All</a>
+            <div class="dropdown-divider"></div>
+            {% for category in category %}
+                <a href="{{ path('category_book', {'id': category.id}) }}" class="dropdown-item" role="button">{{ category.name }}</a>
+                <div class="dropdown-divider"></div>
+            {% else %}
+                <button type="button" class="dropdown-item">The database does not have any category yet</button>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="col col-lg-9">
+        {% for book in result %}
+            <div class="card">
+                <img class="img-responsive" src="{{ asset('books/'~book.path) }}" alt="{{ book.path }}" width="200">
+                <div class="card-body">
+                    <h5 class="card-title">{{ book.title }}</h5>
+                    <p class="card-text">{{ book.author }}</p>
+                    <p class="card-text">{{ book.category }}</p>
+                    <a href="{{ path('details_book', {'id': book.id}) }}" class="btn btn-primary">Details</a>
+                </div>
+            </div>
+             <br>
+        {% else %}
+            <h2>The database doesn't have any books yet</h2>
+        {% endfor %}
+        <div class="navigation">
+            {{ knp_pagination_render(result) }}
+        </div>
+
+    </div>
+
+    </div>
+
+{% endblock %}

@@ -2,14 +2,23 @@
 
 {% block body %}
 
-    {#<div class="col-lg-3 col-md-3">#}
-    {#<div class="btn-group-vertical">#}
-    {#<button type="button" class="btn btn-secondary">Button</button>#}
-    {#<button type="button" class="btn btn-secondary">Button</button>#}
-    {#</div>#}
-    {#</div>#}
     <div class="col-lg-8">
         <form class="form-inline" method="post" action="{{ path('search_book') }}">
+            <div class="btn-group">
+                <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Category
+                </button>
+                <div class="dropdown-menu">
+                    <a href="{{ path('book_index') }}" class="dropdown-item" role="button">All</a>
+                    <div class="dropdown-divider"></div>
+                    {% for category in category %}
+                        <a href="{{ path('category_book', {'id': category.id}) }}" class="dropdown-item" role="button">{{ category.name }}</a>
+                        <div class="dropdown-divider"></div>
+                    {% else %}
+                        <button type="button" class="dropdown-item">The database does not have any category yet</button>
+                    {% endfor %}
+                </div>
+            </div>
             {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('index_category') }}" class="btn btn-outline-secondary">Category</a>
                 <a href="{{ path('new_book') }}" class="btn btn-outline-secondary">New Book</a>
