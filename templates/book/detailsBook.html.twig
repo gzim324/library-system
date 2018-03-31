@@ -40,8 +40,12 @@
                     <td>{{ book.category.name }}</td>
                 </tr>
                 <tr>
+                    <th>ISBN</th>
+                    <td>{{ book.isbn }}</td>
+                </tr>
+                <tr>
                     <th>Description</th>
-                    <td>{{ book.description|striptags('<br><p><b>')|raw }}</td>
+                    <td>{{ book.description|striptags('<br><p><b><ul><li>')|raw }}</td>
                 </tr>
             </table>
         </div>
