@@ -101,7 +101,7 @@ class BorrowedController extends Controller
      */
     public function searchBorrowedUnitAction(Request $request) {
 
-        $search_borrowed_unit = $this->getDoctrine()->getManager()->getRepository('App:Unit')->searchBorrowedUnit($request);
+        $search_borrowed_unit = $this->getDoctrine()->getManager()->getRepository(Unit::class)->searchBorrowedUnit($request);
 
         return array(
             'result' => $search_borrowed_unit

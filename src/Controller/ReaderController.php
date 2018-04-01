@@ -57,7 +57,6 @@ class ReaderController extends Controller
                 $entityManager->flush();
 
                 $formReader->getData();
-//                $this->addFlash("success", "The book has been added");
                 return $this->redirectToRoute("card_reader", ['id' => $reader->getId()]);
             }
         }
@@ -77,7 +76,7 @@ class ReaderController extends Controller
      */
     public function cardReaderAction(Reader $reader, Unit $unit)
     {
-        $borrowedBook = $this->getDoctrine()->getManager()->getRepository('App:Unit')->borrowedBook($unit);
+        $borrowedBook = $this->getDoctrine()->getManager()->getRepository(Unit::class)->borrowedBook($unit);
 
         return array(
             'reader' => $reader,
@@ -94,7 +93,7 @@ class ReaderController extends Controller
      */
     public function searchBookAction(Request $request) {
 
-        $search_book = $this->getDoctrine()->getManager()->getRepository('App:Reader')->searchReader($request);
+        $search_book = $this->getDoctrine()->getManager()->getRepository(Reader::class)->searchReader($request);
 
         $paginator = $this->get('knp_paginator');
         $result = $paginator->paginate(

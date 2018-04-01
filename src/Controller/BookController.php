@@ -151,7 +151,6 @@ class BookController extends Controller
     public function deleteBookAction(Book $book)
     {
         $entityManager = $this->getDoctrine()->getManager();
-//        $book->upload();
         $book->setDeleted(true);
         $entityManager->persist($book);
         $entityManager->flush();
@@ -168,7 +167,7 @@ class BookController extends Controller
      */
     public function searchBookAction(Request $request) {
 
-        $search_book = $this->getDoctrine()->getManager()->getRepository('App:Book')->searchBook($request);
+        $search_book = $this->getDoctrine()->getManager()->getRepository(Book::class)->searchBook($request);
 
         $paginator = $this->get('knp_paginator');
         $result = $paginator->paginate(

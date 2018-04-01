@@ -21,8 +21,7 @@ class EmployeeController extends Controller
      */
     public function employeeIndexAction(Request $request)
     {
-        $user = new User();
-        $selectUsers = $this->getDoctrine()->getManager()->getRepository('App:User')->findAll();
+        $selectUsers = $this->getDoctrine()->getManager()->getRepository(User::class)->findAll();
 
         $paginator = $this->get('knp_paginator');
         $result = $paginator->paginate(
@@ -90,7 +89,7 @@ class EmployeeController extends Controller
      * @Security("has_role('ROLE_ADMIN')")
      */
     public function deleteAccountAction($id) {
-        $user = $this->getDoctrine()->getRepository('App:User')->find($id);
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
 
         $user->setEnabled(false);
 
@@ -107,11 +106,10 @@ class EmployeeController extends Controller
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function undeleteAccountAction($id) {
-        $user = $this->getDoctrine()->getRepository('App:User')->find($id);
-
+    public function undeleteAccountAction($id)
+    {
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
         $user->setEnabled(true);
-
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($user);
         $entityManager->flush();
@@ -126,7 +124,7 @@ class EmployeeController extends Controller
      * @Security("has_role('ROLE_ADMIN')")
      */
     public function resetPasswordEmployeeAction($id) {
-        $user = $this->getDoctrine()->getRepository('App:User')->find($id);
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
 
         $user->setPassword('$2y$13$ERRGpx51PYzpn/N27LIaBu2T0Z3WmUzxEZ/eSB4pggJdvAacYpCDS'); // password = test
 

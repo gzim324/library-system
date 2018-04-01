@@ -38,7 +38,7 @@ class CategoryController extends Controller
             }
         }
 
-        $resultFormCategory = $this->getDoctrine()->getRepository('App:Category')->undeletedCategory();
+        $resultFormCategory = $this->getDoctrine()->getRepository(Category::class)->undeletedCategory();
 
         return array(
             'formCategory' => isset($formCategory) ? $formCategory->createView() : NULL,
@@ -59,8 +59,6 @@ class CategoryController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($category);
             $entityManager->flush();
-
-//            $this->addFlash("success", "The book has been updated");
 
             return $this->redirectToRoute('index_category');
         }

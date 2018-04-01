@@ -38,7 +38,7 @@ class MessageController extends Controller
             }
         }
 
-        $resultFormMessage = $this->getDoctrine()->getRepository('App:Message')->undeletedMessages();
+        $resultFormMessage = $this->getDoctrine()->getRepository(Message::class)->undeletedMessages();
 
         return array(
             'formMessage' => isset($formMessage) ? $formMessage->createView() : NULL,
@@ -54,7 +54,7 @@ class MessageController extends Controller
      */
     public function deleteMessageAction($id)
     {
-        $message = $this->getDoctrine()->getRepository('App:Message')->find($id);
+        $message = $this->getDoctrine()->getRepository(Message::class)->find($id);
 
         if (NULL == $message) {
             throw $this->createNotFoundException('Not Found entry in this database');
