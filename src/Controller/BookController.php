@@ -88,7 +88,7 @@ class BookController extends Controller
                 $entityManager->flush();
 
                 $formBook->getData();
-                return $this->redirectToRoute("details_book", ['id' => $book->getId()]);
+                return $this->redirectToRoute("book_index");
             }
         }
 
