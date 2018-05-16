@@ -49,6 +49,7 @@ class EmployeeController extends Controller
         $formUser = $this->createForm(UserType::class, $user);
 
         $formUser->handleRequest($request);
+
         if($request->isMethod('POST')) {
             if($formUser->isValid()) {
                 $entityManager = $this->getDoctrine()->getManager();
@@ -58,6 +59,7 @@ class EmployeeController extends Controller
 
                 $formUser->getData();
                 $this->addFlash("success", "The employee has been added");
+
                 return $this->redirectToRoute("employee_index");
             }else {
                 $this->addFlash("danger", "The employee cannot be added");
@@ -115,6 +117,7 @@ class EmployeeController extends Controller
         $entityManager->flush();
 
         $this->addFlash('danger', "Account has undeleted");
+
         return $this->redirectToRoute('employee_index');
     }
 
@@ -133,6 +136,7 @@ class EmployeeController extends Controller
         $entityManager->flush();
 
         $this->addFlash('danger', "Account has undeleted");
+
         return $this->redirectToRoute('employee_index');
     }
 }

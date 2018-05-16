@@ -28,6 +28,7 @@ class SettingsController extends Controller
         }
 
         $formSettings = $this->createForm(SettingsType::class, $user);
+
         if($request->isMethod('POST')) {
             $formSettings->handleRequest($request);
             $entityManager = $this->getDoctrine()->getManager();
@@ -35,6 +36,7 @@ class SettingsController extends Controller
             $entityManager->flush();
 
             $this->addFlash('success', 'The information has been added');
+
             return $this->redirectToRoute("message_index");
         }
 

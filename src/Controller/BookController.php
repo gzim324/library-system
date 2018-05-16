@@ -72,13 +72,14 @@ class BookController extends Controller
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function newBookAction(Request $request): array
+    public function newBookAction(Request $request)
     {
         $book = new Book();
 
         $formBook = $this->createForm(BookType::class, $book);
 
         $formBook->handleRequest($request);
+
         if($request->isMethod('POST')) {
             if($formBook->isValid()) {
                 $entityManager = $this->getDoctrine()->getManager();
@@ -87,7 +88,6 @@ class BookController extends Controller
                 $entityManager->persist($book);
                 $entityManager->flush();
 
-                $formBook->getData();
                 return $this->redirectToRoute("book_index");
             }
         }
@@ -128,6 +128,7 @@ class BookController extends Controller
     {
         $formBook = $this->createForm(BookType::class, $book);
         $formBook->handleRequest($request);
+
         if($request->isMethod('POST')) {
             $entityManager = $this->getDoctrine()->getManager();
             $book->upload();
@@ -165,7 +166,8 @@ class BookController extends Controller
      * @Template("book/searchBook.html.twig")
      * @Security("has_role('ROLE_USER')")
      */
-    public function searchBookAction(Request $request) {
+    public function searchBookAction(Request $request)
+    {
 
         $search_book = $this->getDoctrine()->getManager()->getRepository(Book::class)->searchBook($request);
 
@@ -180,28 +182,4 @@ class BookController extends Controller
             'result' => $result
         );
     }
-
-//    /**
-//     * @Route("/search-book/category/{id}", name="search_book_category")
-//     * @param Request $request
-//     * @param Category $category
-//     * @return array
-//     * @Template("book/searchBookCategory.html.twig")
-//     * @Security("has_role('ROLE_USER')")
-//     */
-//    public function searchBookCategoryAction(Request $request, Category $category) {
-//
-//        $search_book = $this->getDoctrine()->getManager()->getRepository('App:Book')->inCategoryBook($request, $category);
-//
-//        $paginator = $this->get('knp_paginator');
-//        $result = $paginator->paginate(
-//            $search_book,
-//            $request->query->getInt('page', 1),
-//            $request->query->getInt('limit', 10)
-//        );
-//
-//        return array(
-//            'result' => $result
-//        );
-//    }
 }

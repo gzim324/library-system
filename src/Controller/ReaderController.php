@@ -50,6 +50,7 @@ class ReaderController extends Controller
         $formReader = $this->createForm(ReaderType::class, $reader);
 
         $formReader->handleRequest($request);
+
         if($request->isMethod('POST')) {
             if($formReader->isValid()) {
                 $entityManager = $this->getDoctrine()->getManager();
@@ -57,6 +58,7 @@ class ReaderController extends Controller
                 $entityManager->flush();
 
                 $formReader->getData();
+
                 return $this->redirectToRoute("card_reader", ['id' => $reader->getId()]);
             }
         }

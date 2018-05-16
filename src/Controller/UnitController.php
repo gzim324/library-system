@@ -25,6 +25,7 @@ class UnitController extends Controller
     {
         $unit = new Unit();
         $formUnit = $this->createForm(UnitType::class, $unit);
+
         if($request->isMethod('POST')) {
             $formUnit->handleRequest($request);
             $entityManager = $this->getDoctrine()->getManager();

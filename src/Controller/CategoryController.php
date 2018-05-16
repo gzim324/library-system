@@ -26,6 +26,7 @@ class CategoryController extends Controller
         $formCategory = $this->createForm(CategoryType::class, $category);
 
         $formCategory->handleRequest($request);
+
         if($request->isMethod('POST')) {
             if($formCategory->isValid()) {
                 $entityManager = $this->getDoctrine()->getManager();
@@ -34,6 +35,7 @@ class CategoryController extends Controller
                 $entityManager->flush();
 
                 $formCategory->getData();
+
                 return $this->redirectToRoute('index_category');
             }
         }
@@ -54,6 +56,7 @@ class CategoryController extends Controller
     public function editAction(Category $category, Request $request)
     {
         $formCategory = $this->createForm(CategoryType::class, $category);
+
         if($request->isMethod('POST')) {
             $formCategory->handleRequest($request);
             $entityManager = $this->getDoctrine()->getManager();

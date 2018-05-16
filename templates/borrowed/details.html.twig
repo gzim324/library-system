@@ -16,7 +16,7 @@
                     <p><b>Deadline:</b> {{ unit.deadline|date('d M Y') }}</p>
                     <a href="{{ path('card_reader', {"id": unit.reader.id}) }}" class="btn btn-link">{{ unit.reader.fullname }}</a>
                     <br> <br>
-                    <td><a href="{{ path('give', {'id': unit.id, 'reader': unit.reader.id}) }}" class="btn btn-dark">Oddaj</a></td>
+                    <td><a href="{{ path('give', {'id': unit.id, 'reader': unit.reader.id}) }}" class="btn btn-dark">Give</a></td>
                 </div>
             </div>
         </div>

@@ -26,6 +26,7 @@ class MessageController extends Controller
         $formMessage = $this->createForm(MessageType::class, $Message);
 
         $formMessage->handleRequest($request);
+
         if($request->isMethod('POST')) {
             if($formMessage->isValid()) {
                 $entityManager = $this->getDoctrine()->getManager();
@@ -34,6 +35,7 @@ class MessageController extends Controller
                 $entityManager->flush();
 
                 $formMessage->getData();
+
                 return $this->redirect($this->generateUrl('message_index'));
             }
         }
