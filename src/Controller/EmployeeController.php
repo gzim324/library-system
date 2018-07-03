@@ -21,7 +21,7 @@ class EmployeeController extends Controller
      */
     public function employeeIndexAction(Request $request)
     {
-        $selectUsers = $this->getDoctrine()->getManager()->getRepository(User::class)->findAll();
+        $selectUsers = $this->getDoctrine()->getManager()->getRepository(User::class)->selectUsers();
 
         $paginator = $this->get('knp_paginator');
         $result = $paginator->paginate(

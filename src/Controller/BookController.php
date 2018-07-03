@@ -40,7 +40,7 @@ class BookController extends Controller
     }
 
     /**
-     * @Route("/category/{id}", name="category_book")
+     * @Route("/category/{name}", name="category_book")
      * @Template("book/bookCategory.html.twig")
      * @Security("has_role('ROLE_USER')")
      * @param Category $category

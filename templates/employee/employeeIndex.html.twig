@@ -15,11 +15,7 @@
         </thead>
         <tbody>
             {% for user in selectUsers %}
-                {% if user.username == 'admin' %}
-                    <tr class="table-active">
-                {% else %}
-                    <tr>
-                {% endif %}
+                <tr>
                     <td>{{ user.username }}</td>
                     <td>{{ user.fullname }}</td>
                     <td>
@@ -29,11 +25,7 @@
                             INACTIVE
                         {% endif %}
                     </td>
-                    {% if user.username == 'admin' %}
-                        <td></td>
-                    {% else %}
                         <td><a href="{{ path('details_employee', {'id': user.id}) }}" class="btn btn-outline-secondary">Details</a></td>
-                    {% endif %}
                     </tr>
             {% endfor %}
         </tbody>

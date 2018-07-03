@@ -2,19 +2,31 @@
 
 namespace App\Repository;
 
-use FOS\UserBundle\Model\User;
+use App\Entity\User;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class UserRepository extends \Doctrine\ORM\EntityRepository
+/**
+ * @method User|null find($id, $lockMode = null, $lockVersion = null)
+ * @method User|null findOneBy(array $criteria, array $orderBy = null)
+ * @method User[]    findAll()
+ * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ */
+class UserRepository extends ServiceEntityRepository
 {
-//    /**
-//     * @return array
-//     * @param User $user
-//     */
-//    public function selectUsers(User $user) {
-//        return $this->createQueryBuilder("user")
-//            ->where("user.roles = :role")
-//            ->setParameter("role", $user->hasRole())
-//            ->getQuery()
-//            ->getResult();
-//    }
+    public function __construct(RegistryInterface $registry)
+    {
+        parent::__construct($registry, User::class);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function selectUsers() {
+        return $this->createQueryBuilder("user")
+            ->where("user.roles = :role")
+            ->setParameter("role", 'a:0:{}')
+            ->getQuery()
+            ->getResult();
+    }
 }
