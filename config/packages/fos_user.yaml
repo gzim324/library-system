@@ -3,5 +3,15 @@ fos_user:
     firewall_name: main
     user_class: App\Entity\User
     from_email:
-        address: "hello@youmail.com"
-        sender_name: "Sender Name"
+        address: michozaur5000@gmail.com
+        sender_name: Library
+    registration:
+        confirmation:
+            from_email:
+                address:        registered@blogweb.com
+                sender_name:    Person who handles Registrations
+    resetting:
+        email:
+            from_email:
+                address:        noreply@blogweb.com
+                sender_name:    No Reply
