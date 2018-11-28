@@ -24,7 +24,8 @@ class ReaderRepository extends ServiceEntityRepository
      * @param Request $request
      * @return array
      */
-    public function searchReader(Request $request) {
+    public function searchReader(Request $request)
+    {
         return $this->createQueryBuilder('reader')
             ->where('reader.fullname LIKE :search')
             ->orWhere('reader.email LIKE :search')

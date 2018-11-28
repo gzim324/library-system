@@ -73,5 +73,4 @@ class User extends BaseUser
     {
         $this->phone = $phone;
     }
-
 }

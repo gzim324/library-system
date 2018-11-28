@@ -22,7 +22,8 @@ class CategoryRepository extends ServiceEntityRepository
     /**
      * @return array
      */
-    public function undeletedCategory() {
+    public function undeletedCategory()
+    {
         return $this->createQueryBuilder("category")
             ->where("category.deleted = :false")
             ->setParameter("false", false)

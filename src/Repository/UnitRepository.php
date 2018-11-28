@@ -64,7 +64,8 @@ class UnitRepository extends ServiceEntityRepository
      * @param Request $request
      * @return array
      */
-    public function searchBorrowedUnit(Request $request) {
+    public function searchBorrowedUnit(Request $request)
+    {
         return $this->createQueryBuilder('unit')
             ->where('unit.unit = :search')
             ->setParameter('search', $request->get('searchBorrowedUnit'))

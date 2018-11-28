@@ -50,8 +50,8 @@ class EmployeeController extends Controller
 
         $formUser->handleRequest($request);
 
-        if($request->isMethod('POST')) {
-            if($formUser->isValid()) {
+        if ($request->isMethod('POST')) {
+            if ($formUser->isValid()) {
                 $entityManager = $this->getDoctrine()->getManager();
                 $user->setEnabled(1);
                 $entityManager->persist($user);
@@ -61,13 +61,13 @@ class EmployeeController extends Controller
                 $this->addFlash("success", "The employee has been added");
 
                 return $this->redirectToRoute("employee_index");
-            }else {
+            } else {
                 $this->addFlash("danger", "The employee cannot be added");
             }
         }
 
         return array(
-            'formUser' => isset($formUser) ? $formUser->createView() : NULL
+            'formUser' => isset($formUser) ? $formUser->createView() : null
         );
     }
 
@@ -90,7 +90,8 @@ class EmployeeController extends Controller
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function deleteAccountAction($id) {
+    public function deleteAccountAction($id)
+    {
         $user = $this->getDoctrine()->getRepository(User::class)->find($id);
 
         $user->setEnabled(false);
@@ -126,7 +127,8 @@ class EmployeeController extends Controller
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function resetPasswordEmployeeAction($id) {
+    public function resetPasswordEmployeeAction($id)
+    {
         $user = $this->getDoctrine()->getRepository(User::class)->find($id);
 
         $user->setPassword('$2y$13$ERRGpx51PYzpn/N27LIaBu2T0Z3WmUzxEZ/eSB4pggJdvAacYpCDS'); // password = test

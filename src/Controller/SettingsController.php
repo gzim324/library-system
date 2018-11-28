@@ -23,13 +23,13 @@ class SettingsController extends Controller
      */
     public function settingsAction(Request $request, User $user)
     {
-        if($this->getUser() != $user->getUsername()) {
+        if ($this->getUser() != $user->getUsername()) {
             throw new AccessDeniedException();
         }
 
         $formSettings = $this->createForm(SettingsType::class, $user);
 
-        if($request->isMethod('POST')) {
+        if ($request->isMethod('POST')) {
             $formSettings->handleRequest($request);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);

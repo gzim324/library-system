@@ -22,7 +22,8 @@ class UserRepository extends ServiceEntityRepository
     /**
      * @return mixed
      */
-    public function selectUsers() {
+    public function selectUsers()
+    {
         return $this->createQueryBuilder("user")
             ->where("user.roles = :role")
             ->setParameter("role", 'a:0:{}')

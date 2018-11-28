@@ -27,8 +27,8 @@ class MessageController extends Controller
 
         $formMessage->handleRequest($request);
 
-        if($request->isMethod('POST')) {
-            if($formMessage->isValid()) {
+        if ($request->isMethod('POST')) {
+            if ($formMessage->isValid()) {
                 $entityManager = $this->getDoctrine()->getManager();
                 $Message->setDeleted(false);
                 $entityManager->persist($Message);
@@ -43,7 +43,7 @@ class MessageController extends Controller
         $resultFormMessage = $this->getDoctrine()->getRepository(Message::class)->undeletedMessages();
 
         return array(
-            'formMessage' => isset($formMessage) ? $formMessage->createView() : NULL,
+            'formMessage' => isset($formMessage) ? $formMessage->createView() : null,
             'resultFormMessage' => $resultFormMessage
         );
     }
@@ -58,7 +58,7 @@ class MessageController extends Controller
     {
         $message = $this->getDoctrine()->getRepository(Message::class)->find($id);
 
-        if (NULL == $message) {
+        if (null == $message) {
             throw $this->createNotFoundException('Not Found entry in this database');
         }
 

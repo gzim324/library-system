@@ -285,5 +285,4 @@ class Book
         // clean up the file property as you won't need it anymore
         $this->file = null;
     }
-
 }

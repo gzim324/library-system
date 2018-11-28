@@ -73,9 +73,8 @@ class BorrowedController extends Controller
 
         $formBorrow->handleRequest($request);
 
-        if($request->isMethod('POST')) {
-            if($formBorrow->isValid())
-            {
+        if ($request->isMethod('POST')) {
+            if ($formBorrow->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $unit->setBorrow(true);
 
@@ -87,7 +86,7 @@ class BorrowedController extends Controller
         }
 
         return array(
-            'formBorrow' => isset($formBorrow) ? $formBorrow->createView() : NULL,
+            'formBorrow' => isset($formBorrow) ? $formBorrow->createView() : null,
             'unit' => $unit
         );
     }
@@ -99,8 +98,8 @@ class BorrowedController extends Controller
      * @Template("borrowed/searchBorrowedUnit.html.twig")
      * @Security("has_role('ROLE_USER')")
      */
-    public function searchBorrowedUnitAction(Request $request) {
-
+    public function searchBorrowedUnitAction(Request $request)
+    {
         $search_borrowed_unit = $this->getDoctrine()->getManager()->getRepository(Unit::class)->searchBorrowedUnit($request);
 
         return array(

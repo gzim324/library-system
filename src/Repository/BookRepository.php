@@ -24,7 +24,8 @@ class BookRepository extends ServiceEntityRepository
     /**
      * @return array
      */
-    public function undeletedBooks() {
+    public function undeletedBooks()
+    {
         return $this->createQueryBuilder("book")
             ->where("book.deleted = :false")
             ->setParameter("false", 0)
@@ -37,7 +38,8 @@ class BookRepository extends ServiceEntityRepository
      * @param Request $request
      * @return array
      */
-    public function searchBook(Request $request) {
+    public function searchBook(Request $request)
+    {
         return $this->createQueryBuilder('book')
             ->where('book.title LIKE :search')
             ->orWhere('book.author LIKE :search')
@@ -70,7 +72,8 @@ class BookRepository extends ServiceEntityRepository
      * @param Category $category
      * @return array
      */
-    public function inCategoryBook(Request $request, Category $category) {
+    public function inCategoryBook(Request $request, Category $category)
+    {
         return $this->createQueryBuilder('book')
             ->where('book.title LIKE :search')
             ->orWhere('book.author LIKE :search')

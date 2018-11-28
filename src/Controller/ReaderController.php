@@ -51,8 +51,8 @@ class ReaderController extends Controller
 
         $formReader->handleRequest($request);
 
-        if($request->isMethod('POST')) {
-            if($formReader->isValid()) {
+        if ($request->isMethod('POST')) {
+            if ($formReader->isValid()) {
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($reader);
                 $entityManager->flush();
@@ -64,7 +64,7 @@ class ReaderController extends Controller
         }
 
         return array(
-            'formReader' => isset($formReader) ? $formReader->createView() : NULL
+            'formReader' => isset($formReader) ? $formReader->createView() : null
         );
     }
 
@@ -93,8 +93,8 @@ class ReaderController extends Controller
      * @Template("reader/searchReader.html.twig")
      * @Security("has_role('ROLE_USER')")
      */
-    public function searchBookAction(Request $request) {
-
+    public function searchBookAction(Request $request)
+    {
         $search_book = $this->getDoctrine()->getManager()->getRepository(Reader::class)->searchReader($request);
 
         $paginator = $this->get('knp_paginator');
@@ -108,5 +108,4 @@ class ReaderController extends Controller
             'result' => $result
         );
     }
-
 }

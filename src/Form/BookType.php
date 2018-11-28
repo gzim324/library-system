@@ -27,7 +27,7 @@ class BookType extends AbstractType
                         ->where('c.deleted = :status')
                         ->setParameter('status', false);
                 },
-                'choice_label' => function($type){
+                'choice_label' => function ($type) {
                     return $type->getName();
                 },
                 'required'   => false,

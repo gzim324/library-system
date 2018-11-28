@@ -80,8 +80,8 @@ class BookController extends Controller
 
         $formBook->handleRequest($request);
 
-        if($request->isMethod('POST')) {
-            if($formBook->isValid()) {
+        if ($request->isMethod('POST')) {
+            if ($formBook->isValid()) {
                 $entityManager = $this->getDoctrine()->getManager();
                 $book->upload();
                 $book->setDeleted(false);
@@ -93,7 +93,7 @@ class BookController extends Controller
         }
 
         return array(
-            'formBook' => isset($formBook) ? $formBook->createView() : NULL
+            'formBook' => isset($formBook) ? $formBook->createView() : null
         );
     }
 
@@ -106,7 +106,7 @@ class BookController extends Controller
      */
     public function detailsBookAction(Book $book)
     {
-        if($book->getDeleted() == true) {
+        if ($book->getDeleted() == true) {
             $this->addFlash("error", "This book does not exist");
             return $this->redirectToRoute("book_index");
         }
@@ -129,7 +129,7 @@ class BookController extends Controller
         $formBook = $this->createForm(BookType::class, $book);
         $formBook->handleRequest($request);
 
-        if($request->isMethod('POST')) {
+        if ($request->isMethod('POST')) {
             $entityManager = $this->getDoctrine()->getManager();
             $book->upload();
             $entityManager->persist($book);
@@ -168,7 +168,6 @@ class BookController extends Controller
      */
     public function searchBookAction(Request $request)
     {
-
         $search_book = $this->getDoctrine()->getManager()->getRepository(Book::class)->searchBook($request);
 
         $paginator = $this->get('knp_paginator');

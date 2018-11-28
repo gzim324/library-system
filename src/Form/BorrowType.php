@@ -18,7 +18,7 @@ class BorrowType extends AbstractType
             ->add('reader', EntityType::class, array(
                 'placeholder' => 'Choose reader',
                 'class' => 'App\Entity\Reader',
-                'choice_label' => function($type){
+                'choice_label' => function ($type) {
                     return $type->getFullname();
                 },
                 'required'   => false,

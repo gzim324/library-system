@@ -27,8 +27,8 @@ class CategoryController extends Controller
 
         $formCategory->handleRequest($request);
 
-        if($request->isMethod('POST')) {
-            if($formCategory->isValid()) {
+        if ($request->isMethod('POST')) {
+            if ($formCategory->isValid()) {
                 $entityManager = $this->getDoctrine()->getManager();
                 $category->setDeleted(0);
                 $entityManager->persist($category);
@@ -43,7 +43,7 @@ class CategoryController extends Controller
         $resultFormCategory = $this->getDoctrine()->getRepository(Category::class)->undeletedCategory();
 
         return array(
-            'formCategory' => isset($formCategory) ? $formCategory->createView() : NULL,
+            'formCategory' => isset($formCategory) ? $formCategory->createView() : null,
             'resultFormCategory' => $resultFormCategory
         );
     }
@@ -57,7 +57,7 @@ class CategoryController extends Controller
     {
         $formCategory = $this->createForm(CategoryType::class, $category);
 
-        if($request->isMethod('POST')) {
+        if ($request->isMethod('POST')) {
             $formCategory->handleRequest($request);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($category);

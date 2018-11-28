@@ -26,7 +26,7 @@ class UnitController extends Controller
         $unit = new Unit();
         $formUnit = $this->createForm(UnitType::class, $unit);
 
-        if($request->isMethod('POST')) {
+        if ($request->isMethod('POST')) {
             $formUnit->handleRequest($request);
             $entityManager = $this->getDoctrine()->getManager();
             $unit->setBorrow(false);
@@ -40,7 +40,7 @@ class UnitController extends Controller
         $selectUnit = $this->getDoctrine()->getManager()->getRepository(Unit::class)->selectUnits($book);
 
         return array(
-            'formUnit' => isset($formUnit) ? $formUnit->createView() : NULL,
+            'formUnit' => isset($formUnit) ? $formUnit->createView() : null,
             'book' => $book,
             'selectUnit' => $selectUnit
         );
@@ -78,5 +78,4 @@ class UnitController extends Controller
             'book' => $book
         );
     }
-
 }

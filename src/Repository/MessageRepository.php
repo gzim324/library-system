@@ -22,7 +22,8 @@ class MessageRepository extends ServiceEntityRepository
     /**
      * @return array
      */
-    public function undeletedMessages() {
+    public function undeletedMessages()
+    {
         return $this->createQueryBuilder("message")
             ->where("message.deleted = :false")
             ->setParameter("false", false)

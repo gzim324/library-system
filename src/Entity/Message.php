@@ -112,5 +112,4 @@ class Message
     {
         $this->deleted = $deleted;
     }
-
 }
